@@ -1,0 +1,40 @@
+{
+	"name": "Code - OSS",
+	
+	"image": "mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:branch-main",
+	"overrideCommand": false,
+	"runArgs": [ "--init", "--security-opt", "seccomp=unconfined", "--shm-size=1g" ],
+	
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"resmon.show.battery": false,
+				"resmon.show.cpufreq": false
+			},
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"mutantdino.resourcemonitor"
+			]
+		}
+	},
+	
+	"forwardPorts": [ 6080, 5901 ],
+	"portsAttributes": {
+		"6080": {
+			"label": "VNC web client (noVNC)",
+			"onAutoForward": "silent"
+		},
+		"5901": {
+			"label": "VNC TCP port",
+			"onAutoForward": "silent"
+		}
+	},
+	
+	"postCreateCommand": ".devcontainer/cache/restore-diff.sh",
+	
+	"remoteUser": "node",
+	
+	"hostRequirements": {
+		"memory": "9gb"
+	}
+}
